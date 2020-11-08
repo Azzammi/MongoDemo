@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "IndexWithKendo";
+}
+
+<div class="text-center">
+    <h2>IndexWithKendo</h2>
+    @(Html.Kendo().Grid<crud.MasterMobile.Models.MasterMobileModel>()
+        .Name("grid")
+        .Columns(columns =>
+        {
+            columns.Bound(c => c.mstMblNo).Width(100);
+            columns.Bound(c => c.mstMblCtrCd).Width(50);
+            columns.Bound(c => c.act).Width(50);
+            columns.Bound(c => c.otpMode).Width(25);
+            columns.Bound(c => c.otp).Width(50);
+            columns.Bound(c => c.email).Width(50);
+        }
+        )
+        .Sortable()
+        .Groupable()
+        .Scrollable()
+        .Pageable()
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .Read(read => read.Action("Select","System"))
+            .Sort(sort => sort.Add("mstMblNo").Descending())
+            .PageSize(20)
+        )
+        )       
+</div>
+
+

@@ -1,0 +1,66 @@
+﻿@model IEnumerable<crud.MasterMobile.Models.MasterMobileModel>
+@{
+    ViewBag.Title = "mstrMobileList";
+}
+
+<h3 style="text-align:center">Master Mobile List</h3>
+<p>
+    @Html.ActionLink("Add New", "Add")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.mstMblNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mstMblCtrCd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mstPosCode)    
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.act)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.otp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.expired)
+        </th>
+        <th></th>
+    </tr>
+    @foreach(var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.mstMblNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.mstMblCtrCd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.mstPosCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.act)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.otp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.expired)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { _id = item._id }) |
+                @Html.ActionLink("Delete", "Delete", new { _id = item._id })
+            </td>
+        </tr>
+    }
+</table>
+
