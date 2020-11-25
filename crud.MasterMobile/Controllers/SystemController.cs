@@ -35,6 +35,7 @@ namespace crud.MasterMobile.Controllers
                 var collection = DB.GetCollection<MasterMobileModel>("tMasterMobile");
 
                 mstrMobile._id = ObjectId.GenerateNewId();
+                mstrMobile.id = new Sequence() { }.GetNextSequenceValue("tMasterMobile", databaseName);
                 mstrMobile.crtAt = GlobalFunctions.GetIPAddress();
                 mstrMobile.crtBy = "Luthfi";
                 mstrMobile.crtOn = DateTime.Now;
@@ -61,14 +62,14 @@ namespace crud.MasterMobile.Controllers
             return View();
         }
 
-        public ActionResult Delete(string id)
+        public ActionResult Delete(string _id)
         {
             if (ModelState.IsValid)
             {
                 var client = new MongoClient(constr);
                 var db = client.GetDatabase(databaseName);
                 var collection = db.GetCollection<MasterMobileModel>("tMasterMobile");
-                var filter = Builders<MasterMobileModel>.Filter.Eq("_id", ObjectId.Parse(id));
+                var filter = Builders<MasterMobileModel>.Filter.Eq("_id", ObjectId.Parse(_id));
                 var deleteRecord = collection.DeleteOneAsync(filter);
                 return RedirectToAction("index");
             }
@@ -120,13 +121,6 @@ namespace crud.MasterMobile.Controllers
                 return View();
             }           
         }
-        public ActionResult Select([DataSourceRequest]DataSourceRequest request)
-        {
-            var Client = new MongoClient(constr);
-            var db = Client.GetDatabase(databaseName);
-            var collection = db.GetCollection<MasterMobileModel>("tMasterMobile").Find(new BsonDocument()).ToList();
-            return Json(collection.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
-        }
-        
+
     }
 }

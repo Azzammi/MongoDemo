@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewBag.Title = "Batch Operation Grid Kendo";
+}
+
+<div>
+    <h2>Batch Operation Grid Kendo</h2>
+    @(Html.Kendo().Grid<crud.MasterMobile.Models.MasterMobileModel>()
+        .Name("grid")
+        .Columns(columns =>
+        {
+            columns.Bound(c => c.mstMblNo).Width(100).Title("Master Mobile Number");
+            columns.Bound(c => c.mstMblCtrCd).Width(50).Title("Master Mobile Code");
+            columns.Bound(c => c.act).Width(50).Title("Act");
+            columns.Bound(c => c.otpMode).Width(25).Title("OTP Mode");
+            columns.Bound(c => c.email).Width(50).Title("Email");
+            columns.Command(command => command.Destroy()).Width(50).Title("Operation");
+        })
+        .ToolBar(toolbar =>
+        {
+            toolbar.Create();
+            toolbar.Save();
+        })
+        .Height(550)
+        .Sortable()
+        .Groupable()
+        .Scrollable()
+        .Pageable()
+        .Editable(editable => editable.Mode(GridEditMode.InCell))
+        .Events(events => events.Sort("onSort"))
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .Batch(true)
+            .Sort(sort => sort.Add("mstMblNo").Descending())
+            .PageSize(20)
+            .ServerOperation(false)
+            .Events(events => events.Error("error_handler"))
+            .Model(model => {
+                model.Id(c => c.id);
+                model.Field(c => c.mstMblNo).Editable(false);
+                model.Field(c => c.email).Editable(true);
+            })
+            .Create("Editing_Create","KendoBatchGrid")
+            .Read("Select", "KendoBatchGrid")
+            .Update("Editing_Update", "KendoBatchGrid")
+            .Destroy("Editing_Destroy", "KendoBatchGrid")
+        )
+        )       
+</div>
+<script>
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Errors:\n";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "\n";
+                    });
+                }
+            });
+            console.log(message);
+        }
+    }
+    // Prevent sorting when new record without Product Name is added
+    function onSort(e) {
+        var gridData = e.sender.dataSource.data()
+        gridData.forEach(function (element) {
+            if (!element.ProductName) {
+                e.preventDefault()
+            }
+        });
+    }
+</script>
+

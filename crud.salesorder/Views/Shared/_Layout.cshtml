@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title - My Telerik MVC Application</title>
+	<link href="@Url.Content("~/Content/kendo/2020.3.1021/kendo.bootstrap-v4.min.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+	<script src="@Url.Content("~/Scripts/kendo/2020.3.1021/jquery.min.js")"></script>
+	<script src="@Url.Content("~/Scripts/kendo/2020.3.1021/angular.min.js")"></script>
+	<script src="@Url.Content("~/Scripts/kendo/2020.3.1021/jszip.min.js")"></script>
+	<script src="@Url.Content("~/Scripts/kendo/2020.3.1021/kendo.all.min.js")"></script>
+	<script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+</head>
+<body class="k-content">   
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid d-flex justify-content-between p-0">
+            <h1 class="navbar-brand d-flex align-items-center">Project Title</h1>
+            <button id="configure" class="k-rpanel-toggle k-button k-primary btn-toggle">
+                <span class="k-icon k-i-menu"></span>
+            </button>
+        </div>
+    </nav>
+
+    <div id="responsive-panel" class="navbar navbar-dark bg-light">
+        <ul id="menu" style="width: 100%">
+            <li>
+                Item 1
+            </li>
+            <li>
+                Item 2
+            </li>
+            <li>
+                Item 3
+            </li>
+            <li disabled="disabled">
+                Disabled Item
+            </li>
+        </ul>
+    </div>
+
+    <main>
+        <div class="container-fluid">
+            @RenderBody()
+        </div>
+    </main>
+
+    <footer class="footer text-center d-flex align-items-center">
+        <div class="container-fluid">
+            <p class="text-muted">Copyright © @DateTime.Now.Year Progress Software Corporation and/or its subsidiaries or affiliates. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        $(document).ready(function () {
+            $("#responsive-panel").kendoResponsivePanel({
+                breakpoint: 768,
+                autoClose: false,
+                orientation: "top"
+            });
+            $("#menu").kendoMenu();
+        });
+        function onclick(e) {
+            $("#responsive-panel").getKendoResponsivePanel().toggle();
+        }
+    </script>
+</body>
+</html>

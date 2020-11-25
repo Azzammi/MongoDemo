@@ -191,6 +191,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Components\GlobalFunctions.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KendoBatchGridController.cs" />
+    <Compile Include="Controllers\KendoPopupController.cs" />
     <Compile Include="Controllers\SystemController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -2859,7 +2861,8 @@
     <Content Include="Scripts\kendo\2020.3.1021\cultures\kendo.culture.aa-ET.min.js.map" />
     <Content Include="Scripts\kendo\2020.3.1021\cultures\kendo.culture.aa-ER.min.js.map" />
     <Content Include="Scripts\kendo\2020.3.1021\cultures\kendo.culture.aa-DJ.min.js.map" />
-    <Content Include="Views\System\IndexWithKendo.cshtml" />
+    <Content Include="Views\KendoBatchGrid\Index.cshtml" />
+    <Content Include="Views\KendoPopup\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
