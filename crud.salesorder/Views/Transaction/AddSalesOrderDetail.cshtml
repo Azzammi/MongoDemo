@@ -1,0 +1,41 @@
+﻿@{
+    int i = ViewBag.i == null ? 0 : ViewBag.i;
+    ViewBag.Title = "AddSalesOrderDetail";
+}
+@model crud.salesorder.Models.SalesOrderDetail
+<div class="col-md-12">
+    <h2>Add Sales Order Detail</h2>
+</div>
+
+<div class="k-form-horizontal">
+    <div class="form-group">
+        @Html.LabelFor(model => model.itemId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.itemId, new { htmlAttributes = new { @Name = "[" + i + "].itemId", @class = "form-control"} })
+            @Html.ValidationMessageFor(model => model.itemId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.itemName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.itemName, new { htmlAttributes = new { @Name = "[" + i + "].itemName",@class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.itemName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.qty, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.qty, new { htmlAttributes = new { @Name = "[" + i + "].qty", @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.qty, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.amount, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.amount, new { htmlAttributes = new { @Name = "[" + i + "].amount",@class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.amount, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+
+

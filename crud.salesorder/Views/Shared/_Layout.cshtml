@@ -4,16 +4,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewBag.Title - My Telerik MVC Application</title>
-	<link href="@Url.Content("~/Content/kendo/2020.3.1021/kendo.bootstrap-v4.min.css")" rel="stylesheet" type="text/css" />
-	<link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" type="text/css" />
-	<link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
-	<script src="@Url.Content("~/Scripts/kendo/2020.3.1021/jquery.min.js")"></script>
-	<script src="@Url.Content("~/Scripts/kendo/2020.3.1021/angular.min.js")"></script>
-	<script src="@Url.Content("~/Scripts/kendo/2020.3.1021/jszip.min.js")"></script>
-	<script src="@Url.Content("~/Scripts/kendo/2020.3.1021/kendo.all.min.js")"></script>
-	<script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+    <link href="https://kendo.cdn.telerik.com/2020.3.1021/styles/kendo.bootstrap-v4.min.css" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+
+    <script src="https://kendo.cdn.telerik.com/2020.3.1021/js/jquery.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2020.3.1021/js/jszip.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2020.3.1021/js/kendo.all.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2020.3.1021/js/kendo.aspnetmvc.min.js"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
 </head>
-<body class="k-content">   
+<body class="k-content">
     <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid d-flex justify-content-between p-0">
             <h1 class="navbar-brand d-flex align-items-center">Project Title</h1>
@@ -26,13 +27,13 @@
     <div id="responsive-panel" class="navbar navbar-dark bg-light">
         <ul id="menu" style="width: 100%">
             <li>
-                Item 1
+                @Html.ActionLink("Goods", "IndexItem", "MasterData")
+            </li>
+            <li disabled="disabled">
+                Biz Partner
             </li>
             <li>
-                Item 2
-            </li>
-            <li>
-                Item 3
+                @Html.ActionLink("Sales Order","SalesOrder","Transaction")
             </li>
             <li disabled="disabled">
                 Disabled Item
@@ -65,5 +66,8 @@
             $("#responsive-panel").getKendoResponsivePanel().toggle();
         }
     </script>
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 </body>
 </html>

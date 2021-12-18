@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "AddSalesOrder";
+}
+@model crud.salesorder.Models.SalesOrderHeader
+ <div class="col-md-12">
+     <h2>Add Sales Order</h2>     
+ </div>
+
+@using (Html.BeginForm("AddSalesOrder", "Transaction", FormMethod.Post))
+{
+    <div class="form-horizontal">
+        <hr />
+        <div class="form-group">
+            @Html.LabelFor(model => model.transactionDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.transactionDate, new { htmlAttributes = new { @type = "date", @class = "form-control datepicker" } })
+                @Html.ValidationMessageFor(model => model.transactionDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.transactionNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.transactionNumber, new { htmlAttributes = new { @class = "form-control"} })
+                @Html.ValidationMessageFor(model => model.transactionNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.idBizPartner, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.idBizPartner, new { htmlAttributes = new { @class = "form-control"} })
+                @Html.ValidationMessageFor(model => model.idBizPartner, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.nameBizPartner, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.nameBizPartner, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.nameBizPartner, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div> 
+
+    <div id="partial">@{Html.RenderAction("AddSalesOrderDetail"); } </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="button" value="Add New Sales Order Detail" id="Add" class="btn"/>
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+    </div>    
+}
+@section scripts{
+    <script>
+        var i = 1;
+        $("#Add").click(function () {
+            $.ajax({
+                url: '/Transaction/AddSalesOrderDetail',
+                data: { i: i },
+                success: function (data) {
+                    $("#partial").append(data);
+                }
+            })
+            i++;
+        })
+    </script>
+}
+

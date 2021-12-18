@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Add Biz Partner";
+}
+@model crud.salesorder.Models.BizPartner
+<div class="col-md-12">
+    <h2>Add New Biz Partner</h2>
+</div>
+@using (Html.BeginForm())
+{
+<div class="k-form-horizontal">
+    <hr />
+    <div class="form-group">
+        @Html.LabelFor(model => model.idBizPartner, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.idBizPartner, new { htmlAttributes = new { @class = "form-control", placeholder = "ex: 0001" } })
+            @Html.ValidationMessageFor(model => model.idBizPartner, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.nameBizPartner, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.nameBizPartner, new { htmlAttributes = new { @class = "form-control", placeholder = "ex: 0001" } })
+            @Html.ValidationMessageFor(model => model.nameBizPartner, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Add" class="btn btn-primary" />
+        </div>
+    </div>
+</div>
+}

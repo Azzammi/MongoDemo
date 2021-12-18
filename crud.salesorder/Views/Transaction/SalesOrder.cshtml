@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "SalesOrder";
+}
+<div class="col-md-12">
+    <h2>SalesOrder</h2>
+</div>
+@(Html.Kendo().Grid<crud.salesorder.Models.SalesOrderHeader>()
+    .Name("grid")
+    .Columns(columns =>
+    {
+        columns.Bound(e => e.transactionNumber).Width(30);
+        columns.Bound(e => e.transactionDate).Width(50);
+        columns.Bound(e => e.status).Width(20);
+        columns.Bound(e => e.Remarks).Width(100);
+    })
+     .ToolBar(toolbar =>
+        {
+            toolbar.Custom().Text("Add").Action("AddSalesOrder", "Transaction");
+        })
+    .Sortable()
+    .Pageable()
+    .Scrollable()
+    //.ClientDetailTemplateId("template")
+    .HtmlAttributes(new { style = "height:550px;" })
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(5)
+        .Read("ReadSalesOrder","Transaction")
+    )
+    .Events(events => events.DataBound("dataBound"))
+)
+
+
+
+<script>
+    function dataBound() {
+        this.expandRow(this.tbody.find("tr.k-master-row").first());
+    }
+</script>
+

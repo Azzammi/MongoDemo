@@ -1,0 +1,73 @@
+﻿@using Kendo.Mvc.UI
+@using Kendo.Mvc.Extensions
+@model kendo.gridInsertData.Models.EmployeeViewModel
+@{
+    ViewBag.Title = "InsertToGrid";
+}
+
+<h2>InsertToGrid</h2>
+<div class="row">
+    <div class="col-md-12">
+        <div id="totalAmount"></div>
+    </div>
+    <div class="col-md-12">
+        <div class="input-group">
+            @Html.LabelFor(model => model.Name)
+            @Html.EditorFor(model => model.Name)
+
+            @Html.LabelFor(model => model.Address)
+            @Html.EditorFor(model => model.Address)
+
+            @Html.LabelFor(model => model.Price)
+            @Html.EditorFor(model => model.Price)
+        </div>
+    </div>
+    <br />
+    <div class="col-md-6">
+        <div class="input-group">
+            <input type="button" value="submit" id="btnAddToGrid" />
+        </div>
+    </div>
+</div>
+<br />
+<div>
+    @(Html.Kendo().Grid<kendo.gridInsertData.Models.EmployeeViewModel>()
+        .Name("MyKendoGrid")
+        .Columns(columns =>
+        {
+            columns.Bound(c => c.Name).Width(20);
+            columns.Bound(c => c.Address).Width(30);
+            columns.Bound(c => c.Price).Width(30);
+        })
+        .HtmlAttributes(new { style="height: 350px; width: 500px;"})
+        .Scrollable()
+        .Groupable()
+        .Sortable()
+        .Pageable(pageable => pageable
+            .Refresh(true)
+            .PageSizes(true)
+            .ButtonCount(5))
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .PageSize(20))
+    )
+</div>
+<script>
+    var totalPrice = 0;
+    $("#btnAddToGrid").click(function () {
+        var name = $('#Name').val();
+        var add = $('#Address').val();
+        var price = parseInt($('#Price').val());
+        
+        totalPrice += price;
+
+        if (name == "" || add == "" || price == "") {
+            alert("Please fill all the input fields");
+        }
+        $('#totalAmount').html('<p>' + totalPrice + '</p>');
+
+        var grid = $("#MyKendoGrid").data("kendoGrid");
+        var datasource = grid.dataSource;
+        datasource.insert({ Name: name, Address: add, Price: price });
+    });
+</script>

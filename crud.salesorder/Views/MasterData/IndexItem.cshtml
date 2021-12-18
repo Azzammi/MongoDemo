@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "IndexItem";
+}
+
+<div>
+    <h2>List Goods</h2>
+    <h5>Master Data Barang</h5>
+    @(Html.Kendo().Grid<crud.salesorder.Models.Goods>()
+        .Name("grid")
+        .Columns(columns =>
+        {
+            columns.Bound(c => c.itemId).Width(50).Title("Item ID");
+            columns.Bound(c => c.itemName).Width(100).Title("Item Name");
+            columns.Bound(c => c.price).Width(50).Title("Price");
+            columns.Template(@<text></text>).ClientTemplate("<a class='k-button k-detail' style='padding: 0px;' href='" + Url.Action("EditItem", "MasterData", new { id = "#=id#" }) + "'><span class='k-icon k-i-info'></span></a>").Width(30).Title("Details");
+            columns.Command(command => { command.Edit(); command.Destroy(); }).Width(50).Title("Operation");
+        })
+        .ToolBar(toolbar =>
+        {
+            toolbar.Custom().Text("Add New").Action("AddItem", "MasterData");
+        })
+        .Height(550)
+        .Sortable()
+        .Groupable()
+        .Scrollable()
+        .Pageable()
+        .Editable(editable => editable.Mode(GridEditMode.PopUp))
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .Sort(sort => sort.Add("itemId").Ascending())
+            .PageSize(10)
+            .Events(events => events.Error("error_handler"))
+            .Model(model => model.Id(c => c.id))
+            .Create("AddItem", "MasterData")
+            .Read("ReadItem", "MasterData")
+            .Update("UpdateItem","MasterData")
+            .Destroy("DestroyItem","MasterData")
+        )
+    )
+</div>
+<script>
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Errors:\n";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "\n";
+                    });
+                }
+            });
+            console.log(message);
+        }
+    }
+    // Prevent sorting when new record without Product Name is added
+    function onSort(e) {
+        var gridData = e.sender.dataSource.data()
+        gridData.forEach(function (element) {
+            if (!element.ProductName) {
+                e.preventDefault()
+            }
+        });
+    }
+</script>

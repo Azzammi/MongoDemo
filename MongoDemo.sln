@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "crud.MasterMobile", "crud.M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "crud.salesorder", "crud.salesorder\crud.salesorder.csproj", "{D6BBF6FC-A5ED-4E16-AC36-830E1E6679FB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kendo.gridInsertData", "kendo.gridInsertData\kendo.gridInsertData.csproj", "{650E5652-AF5E-4F2F-8E8D-47A06D7A3BD2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{D6BBF6FC-A5ED-4E16-AC36-830E1E6679FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6BBF6FC-A5ED-4E16-AC36-830E1E6679FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6BBF6FC-A5ED-4E16-AC36-830E1E6679FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{650E5652-AF5E-4F2F-8E8D-47A06D7A3BD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{650E5652-AF5E-4F2F-8E8D-47A06D7A3BD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{650E5652-AF5E-4F2F-8E8D-47A06D7A3BD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{650E5652-AF5E-4F2F-8E8D-47A06D7A3BD2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
